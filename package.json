@@ -1,0 +1,30 @@
+{
+  "name": "@mbanq/sls",
+  "version": "0.0.1",
+  "description": "Create a serverless project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serverless",
+    "sls",
+    "mbanq"
+  ],
+  "author": {
+    "name": "FinLink, Inc.",
+    "email": "dev@mbanq.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "figlet": "^1.2.0",
+    "inquirer": "^6.0.0",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
+}

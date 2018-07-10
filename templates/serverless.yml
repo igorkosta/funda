@@ -1,0 +1,195 @@
+service: apps
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+plugins:
+  - serverless-domain-manager
+  - serverless-jest-plugin
+  - serverless-offline # serverless-offline needs to be last in the list
+
+package:
+  exclude:
+    - scripts/**
+    - .git/**
+    - env.yml
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  domains:
+    prod: ipa.cloud.mbanq.com
+    stage: ipa.stage.mbanq.com
+    dev: ipa.dev.mbanq.com
+    local: localhost
+  versions-prod: true
+  versions-default: false
+  customDomain:
+    domainName: ${self:custom.domains.${self:custom.stage}}
+    basePath: 'apps'
+    stage: ${self:custom.stage}
+    createRoute53Record: true
+  serverless-offline:
+    resourceRoutes: true
+    port: 4000
+  jest:
+    collectCoverage: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.stage}
+  environment: ${file(./env.yml):${self:custom.stage}}
+  region: ${file(./env.yml):${self:custom.stage}.REGION}
+  versionFunctions: ${self:custom.versions-${self:custom.stage}, self:custom.versions-default}
+  vpc:
+    securityGroupIds:
+      - 'Fn::ImportValue': '${self:provider.region}-app-security-group'
+      - 'Fn::ImportValue': '${self:provider.region}-internet-security-group'
+    subnetIds:
+      - 'Fn::ImportValue': '${self:provider.region}-app-subnet-1'
+      - 'Fn::ImportValue': '${self:provider.region}-app-subnet-2'
+      - 'Fn::ImportValue': '${self:provider.region}-app-subnet-3'
+
+functions:
+  list:
+    handler: handlers/apps.list
+    description: Get list of all apps in the marketplace
+    events:
+      - http:
+          path: ''
+          method: get
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  create:
+    handler: handlers/apps.create
+    description: Creates a new app in the marketplace
+    events:
+      - http:
+          path: ''
+          method: post
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  get:
+    handler: handlers/apps.get
+    description: Get details of a certain app
+    events:
+      - http:
+          path: '{client_id}'
+          method: get
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          request:
+          parameters:
+            paths:
+              client_id: true
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  update:
+    handler: handlers/apps.update
+    description: Updates app details in the marketplace - (should purge all the tokens)
+    events:
+      - http:
+          path: '{client_id}'
+          method: put
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          request:
+          parameters:
+            paths:
+              client_id: true
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  updateKeys:
+    handler: handlers/apps.updateKeys
+    description: Updates app client_id and client_secret
+    events:
+      - http:
+          path: '{client_id}/updateKeys'
+          method: put
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          request:
+          parameters:
+            paths:
+              client_id: true
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  delete:
+    handler: handlers/apps.destroy
+    description: Deletes an app from the marketplace
+    events:
+      - http:
+          path: '{client_id}'
+          method: delete
+          request:
+          parameters:
+             paths:
+               client_id: true
+          cors:
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - TenantId
+          authorizer:
+            name: authorizer
+            arn: ${file(./env.yml):${self:custom.stage}.COGNITO_POOL_ARN}
+  ping:
+    handler: handlers/apps.ping
+    description: Will be pinged to keep the apps warm
+    events:
+      - schedule:
+          name: 'ping'
+          enabled: true
+          description: 'Pings apps every 5 minutes to keep them warm'
+          rate: rate(5 minutes)
+          input:
+            message: 'ping'
