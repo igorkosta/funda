@@ -1,5 +1,5 @@
 {
-  "name": "apps",
+  "name": "MbanqServiceName",
   "version": "0.0.1",
   "description": "Describe you service here",
   "main": "handler.js",
@@ -15,7 +15,7 @@
   ],
   "author": {
     "name": "Mbanq Devs",
-    "email": "dev@mbanq.com
+    "email": "dev@mbanq.com"
   },
   "license": "UNLICENSED",
   "dependencies": {
