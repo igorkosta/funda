@@ -4,7 +4,10 @@
   "description": "Describe you service here",
   "main": "handler.js",
   "scripts": {
-    "start": "sls offline start --stage local --noAuth"
+    "start": "sls offline start --stage local --noAuth",
+    "test": "npm run testsSetup && sls invoke test && npm run testsTeardown",
+    "testsSetup": "./scripts/setup.sh",
+    "testsTeardown": "./scripts/tearDown.sh"
   },
   "keywords": [
     "mbanq",

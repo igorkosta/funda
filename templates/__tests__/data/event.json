@@ -1,0 +1,41 @@
+{
+  "headers": {
+      "Host": "localhost:4000",
+      "User-Agent": "curl/7.54.0",
+      "Accept": "*/*"
+  },
+  "path": "/",
+  "pathParameters": null,
+  "requestContext": {
+      "accountId": "offlineContext_accountId",
+      "resourceId": "offlineContext_resourceId",
+      "apiId": "offlineContext_apiId",
+      "stage": "local",
+      "requestId": "offlineContext_requestId_7560518294640601",
+      "identity": {
+          "cognitoIdentityPoolId": "offlineContext_cognitoIdentityPoolId",
+          "accountId": "offlineContext_accountId",
+          "cognitoIdentityId": "offlineContext_cognitoIdentityId",
+          "caller": "offlineContext_caller",
+          "apiKey": "offlineContext_apiKey",
+          "sourceIp": "127.0.0.1",
+          "cognitoAuthenticationType": "offlineContext_cognitoAuthenticationType",
+          "cognitoAuthenticationProvider": "offlineContext_cognitoAuthenticationProvider",
+          "userArn": "offlineContext_userArn",
+          "userAgent": "curl/7.54.0",
+          "user": "offlineContext_user"
+      },
+      "authorizer": {
+          "principalId": "offlineContext_authorizer_principalId"
+      },
+      "protocol": "HTTP/1.1",
+      "resourcePath": "/",
+      "httpMethod": "GET"
+  },
+  "resource": "/",
+  "httpMethod": "GET",
+  "queryStringParameters": null,
+  "stageVariables": null,
+  "body": null,
+  "isOffline": true
+}

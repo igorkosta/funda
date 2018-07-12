@@ -40,8 +40,8 @@ provider:
   versionFunctions: ${self:custom.versions-${self:custom.stage}, self:custom.versions-default}
 
 functions:
-  test:
-    handler: handlers.test
+  yourfunc:
+    handler: handlers.yourfunc
     description: Test function for your service
     events:
       - http:

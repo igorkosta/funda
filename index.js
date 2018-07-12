@@ -2,8 +2,8 @@
 
 'use strict'
 
-const chalk = require('chalk')
 const clear = require('clear')
+const chalk = require('chalk')
 const figlet = require('figlet')
 const path = require('path')
 const fs = require('fs')
@@ -41,18 +41,18 @@ Rename or move the directory and try again if you want serverless to create it.`
   copy(serviceDirPath)
     .then(() => {
       console.log(
-        chalk.blue(`Setting up the folder structure in: ${serviceDirPath}`)
+        chalk.magenta(`Setting up the folder structure in: ${serviceDirPath}`)
       )
     })
     .then(() => {
       console.log(
-        chalk.blue(`Successfully setup the folder structure`)
+        chalk.magenta(`Successfully setup the folder structure`)
       )
       updateServiceName(serviceDirPath, serviceName)
     })
     .then(() => {
       console.log(
-        chalk.blue(`Installing the npm packages`)
+        chalk.magenta(`Installing the npm packages`)
       )
       installNpmPackages(serviceDirPath)
     })

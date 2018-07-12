@@ -1,8 +1,8 @@
 'use strict'
 
 const { createHandler } = require('shawerma')
-const test = require('./lib/test')
+const { yourfunc } = require('./lib/yourfunc')
 
 module.exports = {
-  test: createHandler(test)
+  yourfunc: createHandler(yourfunc)
 }
