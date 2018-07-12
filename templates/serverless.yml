@@ -41,7 +41,7 @@ provider:
 
 functions:
   test:
-    handler: handlers/MbanqServiceName.test
+    handler: handlers.test
     description: Test function for your service
     events:
       - http:
@@ -52,10 +52,8 @@ functions:
               - Content-Type
               - X-Amz-Date
               - Authorization
-              - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
-              - TenantId
           # uncomment if you want a cognito authorizer
           # authorizer:
           #  name: authorizer

@@ -7,10 +7,12 @@ const clear = require('clear')
 const figlet = require('figlet')
 const path = require('path')
 const fs = require('fs')
-const ncp = require('ncp')
-const replace = require('replace-in-file')
-const exec = require('child_process').exec
-const questions = require('./lib/questions')
+const {
+  questions,
+  copy,
+  updateServiceName,
+  installNpmPackages
+} = require('./lib')
 
 clear()
 console.log(
@@ -21,8 +23,9 @@ console.log(
 
 const run = async () => {
   const serviceSettings = await questions.getServiceSettings()
-  // create dir with serviceSettingsName
+  const serviceName = serviceSettings.serviceName
   const serviceDirPath = path.join(process.cwd(), serviceSettings.serviceName)
+
   if (fs.existsSync(serviceDirPath)) {
     return console.log(
       chalk.red(
@@ -30,49 +33,36 @@ const run = async () => {
 Rename or move the directory and try again if you want serverless to create it.`)
     )
   }
+
+  // mkdir for the new lambda function
   fs.mkdirSync(serviceDirPath)
 
-  // copy all files over from ./templates to ./serviceSettingsName
-  ncp('./templates', serviceDirPath, (err) => {
-    if (err) {
+  // copy all files over from ./templates to ./serviceDirPath
+  copy(serviceDirPath)
+    .then(() => {
+      console.log(
+        chalk.blue(`Setting up the folder structure in: ${serviceDirPath}`)
+      )
+    })
+    .then(() => {
+      console.log(
+        chalk.blue(`Successfully setup the folder structure`)
+      )
+      updateServiceName(serviceDirPath, serviceName)
+    })
+    .then(() => {
+      console.log(
+        chalk.blue(`Installing the npm packages`)
+      )
+      installNpmPackages(serviceDirPath)
+    })
+    .catch((error) => {
       return console.log(
         chalk.red(
-          err
+          error
         )
       )
-    }
-    console.log(`Initialized service directory with files`)
-    // update service name in all the files that are affected
-    const options = {
-      files: [
-        `${serviceDirPath}/package.json`,
-        `${serviceDirPath}/serverless.yml`,
-        `${serviceDirPath}/README.md`
-      ],
-      from: /MbanqServiceName/g,
-      to: serviceSettings.serviceName
-    }
-
-    replace(options)
-      .then(changedFiles => {
-        console.log('Modified files:', changedFiles.join(', '))
-        process.chdir(serviceDirPath)
-        exec('npm install', (error, stdout, stderr) => {
-          // stream stdout to the terminal window
-          // https://stackoverflow.com/questions/14332721/node-js-spawn-child-process-and-get-terminal-output-live
-          console.log('stdout: ' + stdout)
-          console.log('stderr: ' + stderr)
-          if (error !== null) {
-            console.log('exec error: ' + error)
-          }
-        })
-      })
-      .catch(error => {
-        console.error('Error occurred:', error)
-      })
-  })
-
-  console.log(`${process.cwd}`)
+    })
 }
 
 run()
