@@ -1,10 +1,10 @@
 {
-  "name": "@mbanq/sls",
+  "name": "funda",
   "version": "0.0.1",
   "description": "Create a serverless project",
   "main": "index.js",
   "bin": {
-    "msls": "./index.js"
+    "funda": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,17 +15,24 @@
     "mbanq"
   ],
   "author": {
-    "name": "FinLink, Inc.",
-    "email": "dev@mbanq.com"
+    "name": "Igor",
+    "email": "igor.kostyuchenok@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/igorkosta/funda",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:igorkosta/funda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/igorkosta/funda/issues"
   },
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
-    "clui": "^0.3.6",
     "figlet": "^1.2.0",
     "inquirer": "^6.0.0",
-    "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "replace-in-file": "^3.4.0"
   },
