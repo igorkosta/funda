@@ -1,4 +1,4 @@
-# funda
+# funda [![npm version](https://badge.fury.io/js/funda.svg)](https://badge.fury.io/js/funda)
 ## Installation
 `funda` needs to be installed globally
 
