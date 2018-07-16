@@ -1,3 +1,21 @@
 {
-  "extends": "standard"
+  "plugins": ["node", "security"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:security/recommended"
+  ],
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-console": 0,
+    "node/no-unsupported-features": [2, {"version": 8}]
+  }
 }
