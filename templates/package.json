@@ -1,5 +1,5 @@
 {
-  "name": "MbanqServiceName",
+  "name": "CompanyXServiceName",
   "version": "0.0.1",
   "description": "Describe you service here",
   "main": "handler.js",
@@ -17,12 +17,12 @@
     "lambda"
   ],
   "author": {
-    "name": "Mbanq Devs",
-    "email": "dev@mbanq.com"
+    "name": "Your Name",
+    "email": "your@email.com"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
-    "shawerma": "^0.0.12"
+    "shawerma": "0.0.14"
   },
   "devDependencies": {
     "nsp": "^3.2.1",

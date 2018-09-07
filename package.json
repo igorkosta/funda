@@ -1,6 +1,6 @@
 {
   "name": "funda",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Create a serverless project",
   "main": "index.js",
   "bin": {
@@ -27,14 +27,13 @@
   "bugs": {
     "url": "https://github.com/igorkosta/funda/issues"
   },
-  "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
     "figlet": "^1.2.0",
-    "inquirer": "^6.0.0",
+    "inquirer": "^6.2.0",
     "ncp": "^2.0.0",
-    "replace-in-file": "^3.4.0"
+    "replace-in-file": "^3.4.2"
   },
   "devDependencies": {
     "standard": "^11.0.1"

@@ -1,4 +1,4 @@
-service: MbanqServiceName
+service: CompanyXServiceName
 
 plugins:
   - serverless-domain-manager
@@ -15,15 +15,15 @@ package:
 custom:
   stage: ${opt:stage, 'dev'}
   domains:
-    prod: ipa.cloud.mbanq.com
-    stage: ipa.stage.mbanq.com
-    dev: ipa.dev.mbanq.com
+    prod: ''
+    stage: ''
+    dev: ''
     local: localhost
   versions-prod: true
   versions-default: false
   customDomain:
     domainName: ${self:custom.domains.${self:custom.stage}}
-    basePath: 'MbanqServiceName'
+    basePath: 'CompanyXServiceName'
     stage: ${self:custom.stage}
     createRoute53Record: true
   serverless-offline:
@@ -35,10 +35,21 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
+  variableSyntax: "\\${((?!AWS)[ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}"
   stage: ${self:custom.stage}
   environment: ${file(./env.yml):${self:custom.stage}}
   region: ${file(./env.yml):${self:custom.stage}.REGION}
   versionFunctions: ${self:custom.versions-${self:custom.stage}, self:custom.versions-default}
+  # uncomment if you want to use ssm as your key storage
+  #iamRoleStatements:
+  #  - Effect: 'Allow'
+  #    Action: 'ssm:GetParameters'
+  #    Resource:
+  #      - 'Fn::Sub': 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/*'
+  #  - Effect: 'Allow'
+  #    Action: 'kms:Decrypt'
+  #    Resource:
+        - 'Fn::Sub': 'arn:aws:kms:us-east-1:${AWS::AccountId}:key/<your-kms-key>'
 
 functions:
   yourfunc:
