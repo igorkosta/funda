@@ -2,6 +2,8 @@
 
 'use strict'
 
+const updateNotifier = require('update-notifier')
+const pkg = require('./package.json')
 const clear = require('clear')
 const chalk = require('chalk')
 const figlet = require('figlet')
@@ -22,6 +24,7 @@ console.log(
 )
 
 const run = async () => {
+  updateNotifier({ pkg }).notify()
   const serviceSettings = await questions.getServiceSettings()
   const serviceName = serviceSettings.serviceName
   const serviceDirPath = path.join(process.cwd(), serviceSettings.serviceName)
