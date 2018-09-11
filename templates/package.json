@@ -25,7 +25,6 @@
     "shawerma": "0.0.14"
   },
   "devDependencies": {
-    "nsp": "^3.2.1",
     "serverless-domain-manager": "^2.4.0",
     "serverless-jest-plugin": "^0.1.6",
     "serverless-offline": "^3.25.6",
