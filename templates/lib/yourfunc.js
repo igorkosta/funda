@@ -1,8 +1,9 @@
 'use strict'
 
-const { log, Response, HttpError } = require('shawerma')
+const { log, Response } = require('shawerma')
 
 module.exports = (event) => {
+  log.info(event)
   const response = {
     'message': 'You find me in the lib folder'
   }

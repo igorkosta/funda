@@ -1,6 +1,12 @@
 # funda [![npm version](https://badge.fury.io/js/funda.svg)](https://badge.fury.io/js/funda)
 ## Installation
-`funda` needs to be installed globally
+You can either run `funda` with `npx`:
+
+```bash
+npx funda
+```
+
+or you can install `funda` globally
 
 ```
 npm i -g funda

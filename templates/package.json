@@ -1,11 +1,15 @@
 {
   "name": "CompanyXServiceName",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=12.10.0"
+  },
   "description": "Describe you service here",
   "main": "handler.js",
   "scripts": {
     "start": "sls offline start --stage local --noAuth",
     "test": "sls invoke test --coverage",
+    "lint": "eslint './**/*.js' --resolve-plugins-relative-to .",
     "testsSetup": "./scripts/setup.sh",
     "testsTeardown": "./scripts/tearDown.sh"
   },
@@ -25,10 +29,12 @@
     "shawerma": "0.0.14"
   },
   "devDependencies": {
-    "serverless-pseudo-parameters": "^2.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-plugin-security": "^1.4.0",
     "serverless-domain-manager": "^3.3.1",
     "serverless-jest-plugin": "^0.3.0",
-    "serverless-offline": "^3.25.6",
-    "standard": "^10.0.3"
+    "serverless-offline": "^5.8.0",
+    "serverless-pseudo-parameters": "^2.5.0"
   }
 }

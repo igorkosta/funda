@@ -1,12 +1,16 @@
 {
   "name": "funda",
-  "version": "0.0.12",
+  "version": "0.0.13",
+  "engines": {
+    "node": ">=12.10.0"
+  },
   "description": "Create a serverless project",
   "main": "index.js",
   "bin": {
     "funda": "./index.js"
   },
   "scripts": {
+    "lint": "eslint './**/*.js' --resolve-plugins-relative-to .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -37,6 +41,13 @@
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-plugin-security": "^1.4.0",
+    "serverless-domain-manager": "^3.3.1",
+    "serverless-jest-plugin": "^0.3.0",
+    "serverless-offline": "^5.8.0",
+    "serverless-pseudo-parameters": "^2.5.0",
     "standard": "^11.0.1"
   }
 }

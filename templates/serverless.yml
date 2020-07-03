@@ -35,7 +35,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   variableSyntax: "\\${((?!AWS)[ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}"
   stage: ${self:custom.stage}
   environment: ${file(./env.yml):${self:custom.stage}}
