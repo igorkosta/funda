@@ -1,6 +1,6 @@
 {
   "name": "funda",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "engines": {
     "node": ">=12.10.0"
   },

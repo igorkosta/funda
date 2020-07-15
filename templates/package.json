@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "shawerma": "0.0.14"
+    "shawerma": "^0.1.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
