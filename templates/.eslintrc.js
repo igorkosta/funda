@@ -17,7 +17,17 @@ module.exports = {
     jest: true
   },
   rules: {
-    "no-console": 0
+    "no-console": 0,
+    indent: [ "error", 2 ],
+    "comma-dangle": [ "error", "never" ],
+    "comma-spacing": [ "error", { "before": false, "after": true } ],
+    "no-trailing-spaces": "error",
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": "error",
+    "object-curly-spacing": [ "error", "always" ],
+    "template-curly-spacing": [ "error", "always" ],
+    semi: ["error", "never"],
+    eqeqeq: ["error", "always"]
   },
   overrides: [{
     files: "**/*.test.js",
