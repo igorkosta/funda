@@ -1,0 +1,26 @@
+image: mbanq/alpine-sls
+
+stages:
+  - install
+  - lint
+  - test
+
+install:
+  stage: install
+  script:
+    - npm ci
+  artifacts:
+    paths:
+    - node_modules/
+    expire_in: 1 day
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+test:
+  stage: test
+  script:
+    - npm test
+
