@@ -21,6 +21,7 @@ module.exports = {
     semi: ['error', 'never'],
     eqeqeq: ['error', 'always'],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'func-names': ['error', 'as-needed'],
     'no-console': 0,
     'comma-dangle': [ 'error', 'never' ],
     'comma-spacing': [ 'error', { before: false, after: true } ],
